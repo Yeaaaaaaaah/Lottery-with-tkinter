@@ -344,6 +344,7 @@ def winnums():
             else:
                print(dawin)
                print("AWW DANG IT")
+   winnums.clear()
 
 ## If the items in the list reached the amount of five, it'll start pulling the winning numbers
 def gambluuh(inputnum):
