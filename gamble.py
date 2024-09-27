@@ -23,8 +23,7 @@ picked = 0
 dawin = 0
 inputnum = 1
 nums = []
-
-## We gotta make a function to every button, so that when they get clicked, the script adds the assigned value to the list.
+   
 def gambluuh1():
    inputnum = 1 
    gambluuh(inputnum)
@@ -323,7 +322,6 @@ def gambluuh99():
    inputnum = 99 
    gambluuh(inputnum)
 
-## The winning numbers are "pulled" here.
 def winnums():
    count = 0
    points = 0
@@ -333,6 +331,7 @@ def winnums():
       if dawin in nums:
          print(dawin)
          print("YOU GOT ONEEEE")
+         points += 1
       else:
          if dawin+1 in nums:
             print(dawin)
@@ -344,45 +343,47 @@ def winnums():
             else:
                print(dawin)
                print("AWW DANG IT")
-   winnums.clear()
+   if points == 1:
+      showinfo(
+         title="results",
+         message="You won.... a used toilet paper!"
+      )
+   else:
+      if  points == 2:
+         showinfo(
+            title="results",
+            message="You won... a used cigarette from Deák sidewalk!"
+         )
+      else:
+         if  points == 3:
+            showinfo(
+               title="results",
+               message="You won... a worn underwear!"
+            )
+         else:
+            if  points == 4:
+               showinfo(
+                  title="results",
+                  message="You won... 3 chewed gums!! THREE!!"
+               )
+            else:
+               if  points == 5:
+                  showinfo(
+                     title="results",
+                     message="You won 3000000000 Dollars!!"
+                  )
+               else:
+                  showinfo(
+                     title="results",
+                     message="You won... nothing!!"
+                  )
+   nums.clear()
 
-## If the items in the list reached the amount of five, it'll start pulling the winning numbers
 def gambluuh(inputnum):
     nums.append(inputnum)
     print(nums)
     if len(nums) == 5:
         winnums()
-
-## These are the buttons ---------------------------------------------------------------------------------------------------------------------------------
-## Obviously, this was procedurally created by another python script;
-
-#     while counter < 99:
-#         f.write("gamble_button"+str(numbahs)+" = ttk.Button(\n")
-#         f.write(" root,\n")
-#         f.write(" text="+str(numbahs)+",\n")
-#         f.write(" compound=tk.LEFT,\n")
-#         f.write(" command=gambluuh"+str(numbahs)+"\n")
-#         f.write(")\n")
-
-#         f.write("gamble_button"+str(numbahs)+".pack(\n")
-#         f.write(" ipadx=5,\n")
-#         f.write(" ipady=5,\n")
-#         f.write(" expand=False\n")
-#         f.write(")\n")
-#         if x == 540:
-#             x = 30
-#             y += 30
-#             f.write("gamble_button"+str(numbahs)+".place(x="+str(x)+", y="+str(y)+")\n")
-#         else:
-#             x += 30
-#             f.write("gamble_button"+str(numbahs)+".place(x="+str(x)+", y="+str(y)+")\n")
-#         counter +=1
-#         numbahs +=1
-# f.flush
-# f.close
-
-## -----------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 gamble_button1 = ttk.Button(
  root,
@@ -1572,5 +1573,7 @@ gamble_button99.pack(
  expand=False
 )
 gamble_button99.place(x=270, y=160)
+
+
 
 root.mainloop()
