@@ -376,12 +376,14 @@ def addmoney(price):
    f.close()
    moola.set(add)
 
+exact = 0
 ## Fires off when the submit button's pressed, it compares the chosen numbers to the newly generated ones
 def winnums():
    root.update()
    submitbutton.place(x=770, y=32000)
    refresh_button.place(x=150, y=32000)
    getsave()
+   exact = 0
    if int(damoney) > 200:
       losemoney(200)
       count = 0
@@ -395,24 +397,55 @@ def winnums():
          winnum.set(dawin)
          label1.configure(textvariable=winnum)
          if dawin in nums:
-            dabutton = globals()["gamble_button"+str(x)]
-            dabutton.configure(bg="green")
-            points += 1
-            root.title("YOU GOT ONE!!")
+            if x == dawin:
+               dabutton = globals()["gamble_button"+str(dawin)]
+               dabutton.configure(bg="green")
+               points += 1
+               root.title("YOU GOT ONE!!")
+               exact = dawin
+            else:
+               dabutton = globals()["gamble_button"+str(dawin)]
+               dabutton.configure(bg="green")
+               dabutton1 = globals()["gamble_button"+str(x)]
+               dabutton1.configure(bg="red")
+               points += 1
+               root.title("YOU GOT ONE!!")
+               exact = dawin
          else:
             if dawin+1 in nums:
-               dabutton = globals()["gamble_button"+str(x)]
-               dabutton.configure(bg="yellow")
-               root.title("close!")
-            else:
-               if dawin-1 in nums:
-                  dabutton = globals()["gamble_button"+str(x)]
+               if x == dawin:
+                  dabutton = globals()["gamble_button"+str(dawin+1)]
                   dabutton.configure(bg="yellow")
                   root.title("close!")
+                  exact = dawin+1
                else:
-                  dabutton = globals()["gamble_button"+str(x)]
-                  dabutton.configure(bg="red")
-                  root.title("AWW DANG IT!")
+                  dabutton = globals()["gamble_button"+str(dawin+1)]
+                  dabutton.configure(bg="yellow")
+                  dabutton1 = globals()["gamble_button"+str(x)]
+                  dabutton1.configure(bg="red")
+                  root.title("close!")
+                  exact = dawin+1
+            else:
+               if dawin-1 in nums:
+                  if x == dawin:
+                     dabutton = globals()["gamble_button"+str(dawin-1)]
+                     dabutton.configure(bg="yellow")
+                     root.title("close!")
+                     exact = dawin-1
+                  else:
+                     dabutton = globals()["gamble_button"+str(dawin-1)]
+                     dabutton.configure(bg="yellow")
+                     dabutton1 = globals()["gamble_button"+str(x)]
+                     dabutton1.configure(bg="red")
+                     root.title("close!")
+                     exact = dawin-1
+               else:
+                  if exact == x:
+                     print("skipping")
+                  else:
+                     dabutton = globals()["gamble_button"+str(x)]
+                     dabutton.configure(bg="red")
+                     root.title("AWW DANG IT!")
       if points == 1:
          showinfo(
             title="results",
